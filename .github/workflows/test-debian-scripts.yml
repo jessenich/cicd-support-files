@@ -1,0 +1,28 @@
+name: Test Debian
+
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "*"
+
+jobs:
+  test-common-dev-utils:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+      actions: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test
+        run: |
+          echo "WIP";
+          exit 0;
+

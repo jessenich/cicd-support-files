@@ -1,0 +1,106 @@
+name: Publish Docker Image
+
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "v*"
+
+env:
+  TARGET_PLATFORMS: linux/amd64,linux/arm64/v8,linux/arm/v7
+  GHCR_URL: ghcr.io
+  GHCR_LIBRARY: jessenich
+  GHCR_REPO: cicd-shell-test
+  DOCKERHUB_JN91_LIBRARY: jessenich91
+  DOCKERHUB_JN91_REPO: cicd-shell-test
+  LABELS: |
+    maintainer=Jesse N. <jesse@keplerdev.com>
+    org.opencontainers.image.source=https://github.com/jessenich/cicd-support-files/
+
+jobs:
+  build-publish-debian-image:
+    name: Publish Debian ${{ matrix.tag }}
+    env:
+      IMAGE: debian
+    strategy:
+      fail-fast: false
+      matrix:
+        tag: [ "11", "11-slim", "10", "10-slim", "9", "9-slim" ]
+      max-parallel: 2
+    permissions:
+      contents: read
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/Checkout@2
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+            version: latest
+            install: true
+            driver-opts: image=moby/buildkit:master
+            use: true
+
+      - name: Buildx Builder Create
+        run: |
+          docker buildx create \
+            --platform "${{ env.TARGET_PLATFORMS }}" \
+            --name "github-runner-builder" \
+            --use
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Login to Dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.GHCR_URL }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          labels: |
+            "${{ env.LABELS }}"
+          images: |
+            "docker.io/${{ env.DOCKERHUB_JN91_LIBRARY }}/${{ env.DOCKERHUB_JN91_REPO }}"
+            "ghcr.io/${{ env.GHCR_LIBRARY }}/${{ env.GHCR_REPO }}"
+          tags: |
+            type=raw,enable=${{ contains(matrix.tag, '11') }},priority=100,value=latest
+            type=raw,enable=true,priority=100,value=latest.${{ matrix.tag }}
+            type=semver,enable=${{ startsWith(github.ref, 'refs/tags/') }},pattern={{major}}.{{minor}}.{{patch}},suffix=-${{ matrix.tag }}
+          flavor: latest=false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & Push Latest Debian
+        uses: docker/build-push-action@v2
+        env:
+          platforms: "${{ env.TARGET_PLATFORMS }}"
+        with:
+          context: ./debian
+          file: ./debian/test/Dockerfile
+          labels: "${{ steps.meta.output.labels }}"
+          build-args: |
+            VARIANT=${{ matrix.tag }}
+            TZ=UTC
+          platforms: "${{ env.platforms }}"
+          pull: true
+          push: true
+          tags: "${{ steps.meta.outputs.tags }}"
+

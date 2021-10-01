@@ -15,7 +15,6 @@ jobs:
       max-parallel: 2
       fail-fast: false
     runs-on: ubuntu-latest
-    container: "debian:${{ matrix.container }}"
 
     permissions:
       contents: write
@@ -27,8 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Test
-        run: |
-          echo "WIP";
-          exit 0;
+      - name: Pull Debian
+        run: docker pull debian:"${{ matrix.tag }}"
+
+      - name: Run & Exec Script
+        run: docker run --name "test-subject" "debian:${{ matrix.tag }}" "/bin/bash"
 

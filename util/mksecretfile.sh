@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+do_run=true;
+log_level=2;
+correlation_id=0;
+
 secret_type= ;
 secret_service= ;
 script_file_name= ;
@@ -26,99 +30,222 @@ script_info() {
 
 show_usage() {
     cat <<-EOF
-Usage:
-    # Creates secret files for github. The target service must be the first argument
-    $script_file_name --github jessenich ghp_d52beab3-ead6-4a8f-98af-a5ef87e9d218
+USAGE:
+    $script_file_name SERVICE_OPTION [PRIMARY] &| [SECONDARY] &| [TERTIARY]
+    TUPLE_ELEMENT_X can be any value, each individual tuple element is stored within it's own secret
+    file corresponding to the SERVICE_OPTION supplied.
 
-    # The following will error. Interactively must be specified explicitly.
+EXAMPLES:
+
+    ### Creates secret files for github. The target service must be the first argument
+    $script_file_name github jessenich ghp_d52beab3-ead6-4a8f-98af-a5ef87e9d218
+
+    ### The following will error. Interactively must be specified explicitly.
     $script_file_name --dockerhub
 
-    # Creates the necessary dockerhub secret files interactively
+    ### Creates the necessary dockerhub secret files interactively
     $script_file_name --dockerhub --read-username-std-in --read-token-std-in
 
-    # Create Azure Resource Secret
-    $script_file_name --azure resource_id secret_value_1 secret_value_2
+    ### Create Azure Resource Secret
+    $script_file_name --azure myazurestorageresource secret_value_1 secret_value_2
+
+    ### Create Azure Storage SAS & Connection String
+    # Opt1: SAS
+    $script_file_name \
+        AzureCloud \
+        'sv=2020-08-04&ss=b&srt=... \
+        'https://myazurestorageresource...' \
+        --primary-name "sas-token"
+        --secondary-name "
 EOF
 }
 
 parse_args() {
+    local argpos=0;
+    local scoped_positional=true;
+    local exit_positional=4;
+    case "$1" in
+        *[Hh]elp)
+            show_usage;
+            exit 1;;
+
+        -g | -gh | --github | \
+        [Gg][Hh] | [Gg]it[Hh]ub)
+            secret_type="git-remote"
+            secret_service="github";;
+
+        -dv | --devops | --azure-devops | \
+        [Dd]ev[Oo]ps | [Aa]zure-[Dd]ev[Oo]ps | "[Aa]zure [Dd]ev[Oo]ps")
+            secret_type="git-remote"
+            secret_service="azdevops";;
+
+        -gl | --gitlab | \
+        [Gg]it[Ll]ab)
+            secret_type="git-remote";
+            secret_service="gitlab";;
+
+        -jb | --jetbrains-spaces | \
+        [Ss]paces | [Jj]et[Bb]rains | [Jj]et[Bb]rains-[Ss]paces)
+            secret_type="git-remote";
+            secret_service="jetbrains";;
+
+        -b | --bb | --bitbucket | \
+        [Bb]it[Bb]ucket)
+            secret_type="git-remote";
+            secret_service="bitbucket";;
+
+        -d | -dh | --dockerhub | \
+        [Dd]ocker | [Dd]ocker[Hh]ub | [Dd]ocker.[Ii][Oo])
+            secret_type="docker-registry"
+            secret_service="dockerhub";;
+
+        -acr | --azure-container-registry | \
+        [Aa][Cc][Rr] | "[Aa]zure [Cc]ontainer [Rr]egistry" | [Aa]zure-[Cc]ontainer-[Rr]egistry)
+            secret_type="docker-registry";
+            secret_service="azure-container-registry";;
+
+        -az | --azure | --azure-cloud | \
+        [Aa][Zz] | [Aa]zure | "[Aa]zure [Cc]loud" | [Aa]zure-[Cc]loud | [Aa]zure[Cc]loud)
+            secret_type="cloud";
+            secret_service="azure-cloud";;
+
+        -gcp | --google-cloud | --google-cloud-platform | \
+        [Gg][Cc][Pp] | "[Gg]oogle [Cc]loud" | [Gg]oogle-[Cc]loud)
+            secret_type="cloud";
+            secret_service="google-cloud";;
+
+        -aws | --amazon | --amazon-web-services | \
+        [Aa][Ww][Ss] | [Aa]mazon-[Ww]eb-[Ss]ervices | "[Aa]mazon [Ww]eb [Ss]ervices")
+            secret_type="cloud";
+            secret_service="aws-cloud";;
+
+        -do | --digital-ocean | \
+        [Dd][Oo] | [Dd]igital-[Oo]cean | "[Dd]igital [Oo]cean")
+            secret_type="cloud";
+            secret_service="digital-ocean-cloud";;
+
+        -j | --jira | \
+        [Jj]ira)
+            secret_type="tasking";
+            secret_service="jira_boards";;
+
+        --asana | \
+        [Aa]sana)
+            secret_type="tasking";
+            secret_service="asana";;
+
+    esac
+    shift;
+    argpos+=1;
+
+    while [ "${1[@]:0:2}" = ]
+
     while [ "$#" -gt 0 ]; do
+
+
         case "$1" in
-            -g | -gh | --github)
-                secret_type="git-remote"
-                secret_service="github";
+            -rP | --read-primary-std-in)
+                read_primary=true;
+                argpos+=1
                 shift;;
 
-            -dv | --devops | --azure-devops)
-                secret_type="git-remote"
-                secret_service="azdevops";
-                shift;;
-
-            -gl | --gitlab)
-                secret_type="git-remote";
-                secret_service="gitlab";
-                shift;;
-
-            -jb | --jetbrains-spaces)
-                secret_type="git-remote"
-                secret_service="jetbrains"
-                shift;;
-
-            -b | --bb | --bitbucket)
-                secret_type="git-remote";
-                secret_service="bitbucket";
-                shift;;
-
-            -d | -dh | --dockerhub)
-                secret_type="docker-registry"
-                secret_service="dockerhub";
-                shift;;
-
-            -acr | --azure-container-registry)
-                secret_type="docker-registry";
-                secret_service="azure-container-registry";
-                shift;;
-
-            -az | --azure | --azure-cloud)
-                secret_type="cloud";
-                secret_service="azure-cloud";
-                shift;;
-
-            -gcp | --google-cloud | --google-cloud-platform)
-                secret_type="cloud";
-                secret_service="google-cloud";
-                shift;;
-
-            -aws | --amazon | --amazon-web-services)
-                secret_type="cloud";
-                secret_service="aws-cloud"
-                shift;;
-
-            -j | --jira)
-                secret_type="tasking"
-                secret_service="jira_boards"
-                shift;;
-
-            --asana)
-                secret_type="tasking";
-                secret_service="asana"
-                shift;;
-
-            --read-token-std-in)
-                read_token=true;
-                shift;;
-
-            --read-secondary-std-in)
+            -rS | --read-secondary-std-in)
                 read_secondary=true;
+                argpos+=1
                 shift;;
 
-            --read-username-std-in)
-                read_username=true;
+            -rT | --read-tertiary-std-in)
+                read_tertiary=true;
+                argpos+=1
                 shift;;
 
-            --no-user | --no-email | --only-token | --only-token-secondary)
-                no_user=true;
+            -rQ | --read-quaternary-std-in)
+                read_quaternary=true;
+                argpos+=1
                 shift;;
+
+            # Name arguments optional during addition, requireed for successful update
+            -Pn | --primary-name)
+                if [ -z "$2" ]; then show_usage && exit 1; fi
+                primary_name="$2";
+                argpos+=2
+                shift 2;;
+
+            -Sn | --secondary-name)
+                if [ -z "$2" ]; then show_usage && exit 1; fi
+                secondary_name="$2";
+                argpos+=2
+                shift 2;;
+
+            -Tn | --tertiary-name)
+                if [ -z "$2" ]; then show_usage && exit 1; fi
+                tertiary_name="$2";
+                argpos+=2
+                shift 2;;
+
+            -Qn | --quaternary-name)
+                if [ -z "$2" ]; then show_usage && exit 1; fi
+                quaternary_name="$2";
+                argpos+=2
+                shift 2;;
+
+            # Ignore arguments only apply during updates.
+            -iP | --ignore-first)
+                exclude1=true;
+                argpos+=1
+                shift;;
+
+            -iS | --ignore-secondary)
+                exclude2=true;
+                argpos+=1
+                shift;;
+
+            -iT | --ignore-tertiary)
+                exclude3=true;
+                argpos+=1;
+                shift;;
+
+            -iQ | --ignore-quaternary)
+                exclude4=true;
+                argpos+=1;
+                shift;;
+
+            --source-only)
+                do_run=false;
+                argpos+=1
+                shift;;
+
+
+
+            --correlation-id)
+                if [ -z "$2" ]; then echo_usage && exit 1; fi
+                correlation_id="$2";
+                shift 2;;
+
+            --storage-driver)
+                if [ -z "$2" ]; then show_usage && exit 1; fi
+                case "$2" in
+                    [Ff][Ss] | [Ff]ile[Mm]arks) storage_driver=marks;;
+                    [Ss][Qq][Ll]ite) storage_driver=sqlite;;
+                    [Dd]ot[Ee]nv | [Ee]nv) storage_driver=dotenv;;
+                    [Jj][Ss][Oo][Nn]) storage_driver=json;;
+                    [Yy][Aa][Mm][Ll] | [Yy][Aa][Ll]) storage_driver=yaml;;
+                esac
+                shift 2;;
+
+
+            --log-level)
+                case "$2" in
+                    [Vv] | [Vv]erbose) log_level=5;;
+                    [Dd] | [Dd]ebug) log_level=4;;
+                    [Ii] | [Ii]nfo | [Ii]nformation) log_level=3;;
+                    [Ww] | [Ww]arn | [Ww]arning) log_level=2;;
+                    [Ee] | [Ee]rror) log_level=1;;
+                    [Ff] | [Ff]atal) log_level=0;;
+                esac
+                shift 2;;
+
+
 
             *)
                 # Secret values are positional

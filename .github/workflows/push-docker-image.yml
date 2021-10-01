@@ -84,7 +84,7 @@ jobs:
           tags: |
             type=raw,enable=${{ contains(matrix.tag, '11') }},priority=100,value=latest
             type=raw,enable=true,priority=100,value=latest.${{ matrix.tag }}
-            type=semver,enable=${{ startsWith(github.ref, 'refs/tags/') }},pattern={{major}}.{{minor}}.{{patch}},suffix=-${{ matrix.tag }}
+            type=semver,enable=${{ startsWith(github.ref, 'refs/tags/') }},pattern={{major}}.{{minor}}.{{patch}},suffix=-${{ env.IMAGE }}.${{ matrix.tag }}
           flavor: latest=false
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -93,8 +93,8 @@ jobs:
         env:
           platforms: "${{ env.TARGET_PLATFORMS }}"
         with:
-          context: ./debian
-          file: ./debian/test/Dockerfile
+          context: "./${{ env.IMAGE }}"
+          file: "./${{ env.IMAGE }}/test/Dockerfile"
           labels: "${{ steps.meta.output.labels }}"
           build-args: |
             VARIANT=${{ matrix.tag }}

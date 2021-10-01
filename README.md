@@ -1,4 +1,4 @@
-# Docker Alpine Base Image
+<!-- # Docker Alpine Base Image
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/jessenich/docker-alpine?style=for-the-badge)](https://github.com/jessenich/docker-alpine/commit/57d54b3ff6bf4d6a7b72358eaf05b47b72ffdc6b) [![GitHub](https://img.shields.io/github/license/jessenich/docker-alpine?style=for-the-badge)](https://github.com/jessenich/cicd-support-scripts/blob/main/LICENSE)
 
@@ -11,4 +11,4 @@
 
 [__GitHub Source__](https://github.com/jessenich/docker-alpine)
 
-`docker pull jessenich91/alpine:latest`
+`docker pull jessenich91/alpine:latest` -->

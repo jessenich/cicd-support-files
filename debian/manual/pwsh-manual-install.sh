@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
- 
+
 sudo apt-get update
 # install the requirements
 sudo apt-get install -y \
@@ -15,21 +15,10 @@ sudo apt-get install -y \
         libstdc++6 \
         zlib1g \
         curl
- 
+
 # Download the powershell '.tar.gz' archive
 curl -L  https://github.com/PowerShell/PowerShell/releases/download/v7.1.4/powershell-7.1.4-linux-x64.tar.gz -o /tmp/powershell.tar.gz
- 
-# Create the target folder where powershell will be placed
 sudo mkdir -p /opt/microsoft/powershell/7
- 
-# Expand powershell to the target folder
 sudo tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7
- 
-# Set execute permissions
 sudo chmod +x /opt/microsoft/powershell/7/pwsh
- 
-# Create the symbolic link that points to pwsh
 sudo ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
- 
-# Start PowerShell
-pwsh

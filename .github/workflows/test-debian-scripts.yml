@@ -8,8 +8,12 @@ on:
       - "*"
 
 jobs:
-  test-common-dev-utils:
+  test-install-common-dev-utils:
+    strategy:
+      matrix:
+        tag: [ "11", "11-slim", "10", "10-slim", "9", "9-slim" ]
     runs-on: ubuntu-latest
+    container: "debian:${{ matrix.container }}"
 
     permissions:
       contents: write

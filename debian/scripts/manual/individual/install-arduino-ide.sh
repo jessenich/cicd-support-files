@@ -1,10 +1,12 @@
 #!/usr/bin/bash
 
+# shellcheck disable=SC2154
+
 echo "WIP..................." >&2;
 exit 127;
 
-__runtime_dir="${XDG_RUNTIME_DIR:-$home/.local/bin}";
-__data_dir="${XDG_DATA_DIR"
+__runtime_dir="${XDG_RUNTIME_DIR:-$HOME/.local/bin}";
+__data_dir="${XDG_DATA_DIR}"
 __version="1.8.16";
 
 __download-arduino-package-file() {
@@ -50,7 +52,6 @@ test -n "${__beta_file}" && \
     __file="${__beta_file}" || \
     __file="arduino-${__version}-linux64.tar.xz"
 
-
-
 if [ "${__file}" = "${__beta_file}" ]; then
-    unzip -uoaqq "/tmp/${__file}"
+    unzip -uoaqq "/tmp/${__file}";
+fi

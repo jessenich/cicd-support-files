@@ -20,7 +20,7 @@ sudo apt-get install build-essential
 #     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/jesse/.profile
 #     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # - Run `brew help` to get started
-# - Further documentation: 
+# - Further documentation:
 #     https://docs.brew.sh
 # - Install the Homebrew dependencies if you have sudo access:
 #     sudo apt-get install build-essential
@@ -42,7 +42,9 @@ EOF
 
 test -f "$HOME/.zshrc" && \
 echo "$rc_additions" >> "$HOME/.zshrc";
-echo "$rc_additions" >> "$HOME/.profile";
+
+test -f "$HOME/.bashrc" && \
+echo "$rc_additions" >> "$HOME/.bashrc";
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 

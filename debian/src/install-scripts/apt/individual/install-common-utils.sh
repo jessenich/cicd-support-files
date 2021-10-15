@@ -4,15 +4,15 @@ sudo apt-get update;
 
 ## APT Utils:
 sudo apt-get install -y \
-    apt-transport-https
+    apt-transport-https;
 
 ## Gnome Extensions
 sudo apt-get install -y \
     chrome-gnome-shell \
     network-manager-ssh-gnome;
-    
+
 ## General utilities
-sudo apt-get install -y
+sudo apt-get install -y \
     curl \
     debian-goodies \
     dkms \
@@ -21,10 +21,4 @@ sudo apt-get install -y
     unzip \
     wget \
     wzip \
-    zip
-     
-    
-    
-    
-    
-    
+    zip;

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if which powershell >/dev/null; then
-    echo "powershell already installed at $(which powershell)";
+if command -v powershell >/dev/null; then
+    echo "powershell already installed at $(command -v powershell)";
 else
     sudo snap install powershell >/dev/null;
     echo "Finished installing powershell...";

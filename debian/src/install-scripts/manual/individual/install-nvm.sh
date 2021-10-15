@@ -1,46 +1,66 @@
 #!/usr/bin/env bash
 
-current=true
-lts=true
-versions=( )
 
-while [ "$#" -gt 0 ]; do
-    case "$1" in
-        -*c | --current)
-            current=true;
-            shift;;
-        -*l | --lts)
-            lts=true;
-            shift;;
 
-        -*v | --version | --versions)
-            while [ "$2" =~ "^[0-9]+([.][0-9]+)?$" ]; do
-                versions+=( "$2" );
-            done
-            shift;;
-    esac
-done
+__install_nvm() {
+    local current=true;
+    local lts=true;
+    local versions=( );
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -*c | --current)
+                current=true;
+                shift;;
+            -*l | --lts)
+                lts=true;
+                shift;;
 
-# The script clones the nvm repository to ~/.nvm and adds the source line to
-# your profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).
-# (You can add the source loading line manually, if the automated install tool does not add it for you.)
+            -*v | --version | --versions)
+                while [[ "$2" =~ ^[0-9]+([.][0-9]+)?$ ]]; do
+                    versions+=( "$2" );
+                done
+                shift;;
+        esac
+    done
 
-nvmloader=$(cat <<-'EOF'
-    if [ -d "$HOME/.nvm" ]; then
-        # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-        export NVM_DIR="$HOME/.nvm"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
-        # This loads nvm
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    # The script clones the nvm repository to ~/.nvm and adds the source line to
+    # your profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).
+    # (You can add the source loading line manually, if the automated install tool does not add it for you.)
 
-        # This loads nvm bash_completion
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    fi
-EOF
-)
+    nvmloader_bash="$(cat \
+<<'EOF'
 
-if [ -d "$HOME/.profile" ]; then
-    echo "$nvmloader" >> "$HOME/.profile"
+if [ -d "$HOME/.nvm" ]; then
+    # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    export NVM_DIR="$HOME/.nvm"
+
+    # This loads nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+    # This loads nvm bash_completion
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 fi
+EOF
+)"
+
+    nvmloader_zsh="$(cat \
+<<'EOF'
+
+if [ -d "$HOME/.nvm" ]; then
+    # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    export NVM_DIR="$HOME/.nvm"
+
+    # This loads nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
+EOF
+)"
+
+    if [ -f "$HOME/.bashrc" ]; then echo "$nvmloader_bash" >> "$HOME/.bashrc"; fi
+    if [ -f "$HOME/.zshrc" ]; then echo "$nvmloader_zsh" >> "$HOME/.zshrc"; fi
+}
+
+__install_nvm "$@";

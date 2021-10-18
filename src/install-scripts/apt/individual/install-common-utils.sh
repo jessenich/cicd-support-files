@@ -5,6 +5,7 @@ sudo apt-get update;
 ## APT Utils:
 sudo apt-get install -y \
     apt-transport-https;
+    ubuntu-restricted-extras
 
 ## Gnome Extensions
 sudo apt-get install -y \

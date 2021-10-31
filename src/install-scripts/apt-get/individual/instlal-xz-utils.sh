@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__install_docker() {
+__install_xz_utils() {
     local __apt_update="0";
     local __apt_upgrade="0";
 
@@ -19,12 +19,13 @@ __install_docker() {
     if [ "$__apt_update" = true ]; then sudo apt-get update; fi
     if [ "$__apt_upgrade" = true ]; then sudo apt-get upgrade; fi
 
-    sudo apt install zsh;
+    sudo apt-get install -y xz-utils;
 
-    if ! which zsh > /dev/null; then
-        echo "Unknown error occurred. zsh installation not detected. which exe: $(which exe)" >&2;
+    if ! command -v xz-utils > /dev/null; then
+        echo "Unknown error occurred. xz-utils installation not detected. which xz: $(command -v xz)" >&2;
         exit 1;
     fi
+
 }
 
-__install_docker "$@";
+__install_xz_utils "$@"

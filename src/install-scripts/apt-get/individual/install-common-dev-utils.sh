@@ -24,10 +24,7 @@ sudo apt-get install -y \
 ## Git Auxillaries
 sudo apt-get install -y \
     git-all \
-    git-annex \
-    git-annex-remote-rclone \
     git-doc \
-    git-extras \
     git-filter-repo \
     git-ftp \
     git-lfs \

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="https://protonvpn.com/support/wp-content/themes/protonvpn/img/favicon.ico">
+    <script type="text/javascript">
+        document.querySelector("html").classList.remove("no-js");;
+    </script>
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v17.4 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>How to install the ProtonVPN Linux app on Debian 10+</title>
+	<meta name="description" content="Learn how to install the official ProtonVPN Linux app on Debian systems." />
+	<link rel="canonical" href="https://protonvpn.com/support/official-linux-vpn-debian/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="How to install the ProtonVPN Linux app on Debian 10+" />
+	<meta property="og:description" content="Learn how to install the official ProtonVPN Linux app on Debian systems." />
+	<meta property="og:url" content="https://protonvpn.com/support/official-linux-vpn-debian/" />
+	<meta property="og:site_name" content="ProtonVPN Support" />
+	<meta property="article:publisher" content="https://www.facebook.com/ProtonVPN/" />
+	<meta property="article:modified_time" content="2021-09-01T12:28:53+00:00" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@ProtonVPN" />
+	<meta name="twitter:label1" content="Est. reading time" />
+	<meta name="twitter:data1" content="3 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://protonvpn.com/support/#organization","name":"ProtonVPN","url":"https://protonvpn.com/support/","sameAs":["https://www.facebook.com/ProtonVPN/","https://www.instagram.com/explore/tags/protonvpn/top/","https://www.linkedin.com/company/protonvpn/","https://twitter.com/ProtonVPN"],"logo":{"@type":"ImageObject","@id":"https://protonvpn.com/support/#logo","inLanguage":"en-US","url":"https://protonvpn.com/support/wp-content/uploads/2017/06/protonvpn-sign-green-2.png","contentUrl":"https://protonvpn.com/support/wp-content/uploads/2017/06/protonvpn-sign-green-2.png","width":512,"height":512,"caption":"ProtonVPN"},"image":{"@id":"https://protonvpn.com/support/#logo"}},{"@type":"WebSite","@id":"https://protonvpn.com/support/#website","url":"https://protonvpn.com/support/","name":"ProtonVPN Support","description":"Get help for your free VPN","publisher":{"@id":"https://protonvpn.com/support/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://protonvpn.com/support/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://protonvpn.com/support/official-linux-vpn-debian/#webpage","url":"https://protonvpn.com/support/official-linux-vpn-debian/","name":"How to install the ProtonVPN Linux app on Debian 10+","isPartOf":{"@id":"https://protonvpn.com/support/#website"},"datePublished":"2021-05-27T15:51:25+00:00","dateModified":"2021-09-01T12:28:53+00:00","description":"Learn how to install the official ProtonVPN Linux app on Debian systems.","breadcrumb":{"@id":"https://protonvpn.com/support/official-linux-vpn-debian/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://protonvpn.com/support/official-linux-vpn-debian/"]}]},{"@type":"BreadcrumbList","@id":"https://protonvpn.com/support/official-linux-vpn-debian/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://protonvpn.com/support/"},{"@type":"ListItem","position":2,"name":"Article","item":"https://protonvpn.com/support/knowledge-base/"},{"@type":"ListItem","position":3,"name":"How to install a VPN on Debian"}]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="alternate" type="application/rss+xml" title="ProtonVPN Support &raquo; Feed" href="https://protonvpn.com/support/feed/" />
+<link rel="alternate" type="application/rss+xml" title="ProtonVPN Support &raquo; Comments Feed" href="https://protonvpn.com/support/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="ProtonVPN Support &raquo; How to install a VPN on Debian Comments Feed" href="https://protonvpn.com/support/official-linux-vpn-debian/feed/" />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://protonvpn.com/support/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css'  href='https://protonvpn.com/support/wp-content/themes/protonvpn/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='screen' />
+<link rel='stylesheet' id='bootstrap-css'  href='https://protonvpn.com/support/wp-content/themes/protonvpn/css/static/bootstrap.4.3.1.css?ver=4.3.1' type='text/css' media='screen' />
+<link rel='stylesheet' id='main-css'  href='https://protonvpn.com/support/wp-content/themes/protonvpn/css/static/main.css?ver=1623655431' type='text/css' media='screen' />
+<link rel='stylesheet' id='styles-css'  href='https://protonvpn.com/support/wp-content/themes/protonvpn/css/styles.css?ver=1634889161' type='text/css' media='screen' />
+<script type='text/javascript' src='https://protonvpn.com/support/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/plugins/stop-user-enumeration/frontend/js/frontend.js?ver=1.3.2' id='stop-user-enumeration-js'></script>
+<link rel='shortlink' href='https://protonvpn.com/support/?p=1866' />
+<link rel="alternate" type="application/json+oembed" href="https://protonvpn.com/support/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fprotonvpn.com%2Fsupport%2Fofficial-linux-vpn-debian%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://protonvpn.com/support/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fprotonvpn.com%2Fsupport%2Fofficial-linux-vpn-debian%2F&#038;format=xml" />
+<!--[if lt IE 9]><script src="https://protonvpn.com/support/wp-content/themes/protonvpn/inc/ht-core/js/html5.js"></script><![endif]--><!--[if (gte IE 6)&(lte IE 8)]><script src="https://protonvpn.com/support/wp-content/themes/protonvpn/inc/ht-core/js/selectivizr-min.js"></script><![endif]--></head>
+
+<body class="ht_kb-template-default single single-ht_kb postid-1866 single-format-standard vpn-kb unknown">
+<div id="navbar-mobile-overlay"></div>
+<div id="navbar-mobile">
+    <a href="#" class="navbar-toggler close fa fa-times fa-2x"></a>
+    <div class="navbar-mobile-logo"></div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="https://protonvpn.com/about">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://protonvpn.com/secure-vpn">Features</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://protonvpn.com/pricing">Pricing</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://protonvpn.com/blog/">Blog</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="https://protonvpn.com/support">Support</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://account.protonvpn.com">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://protonvpn.com/pricing">Signup</a>
+        </li>
+    </ul>
+</div>
+
+<div id="topbar">
+    <div class="container text-right">
+    <a class="pull-left" href="/"><i class="fa fa-chevron-left"></i> &nbsp;Return to protonvpn.com</a>
+        <a href="https://facebook.com/ProtonVPN" target="_blank" rel="noreferrer nofollow noopener"><i class="fa fa-facebook"></i><span> Facebook</span></a>&nbsp;&nbsp;
+        <a href="https://twitter.com/ProtonVPN" target="_blank" rel="noreferrer nofollow noopener"><i class="fa fa-twitter"></i><span> Twitter</span></a>&nbsp;&nbsp;
+        <a href="https://www.reddit.com/r/ProtonVPN/" target="_blank" rel="noreferrer nofollow noopener"><i class="fa fa-reddit-alien"></i><span> Reddit</span></a>&nbsp;&nbsp;
+        <a
+             href="https://www.instagram.com/protonvpn/"
+             target="_blank"
+             rel="noreferrer nofollow noopener"><i class="fa fa-instagram"></i><span> Instagram</span></a>&nbsp;&nbsp;
+        <a
+             href="https://mastodon.social/@ProtonVPN"
+             target="_blank"
+             rel="noreferrer nofollow noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" width="15" height="15" class="mastodon-icon" aria-hidden="true"><path d="M13.578 5.205c0-2.778-1.823-3.593-1.823-3.593-.916-.42-2.493-.598-4.132-.612h-.044c-1.64.014-3.211.193-4.132.612 0 0-1.823.815-1.823 3.593 0 .636-.01 1.398.01 2.203.067 2.72.496 5.396 3.009 6.062a9.46 9.46 0 0 0 2.956.328c1.451-.082 2.27-.516 2.27-.516l-.047-1.056s-1.042.328-2.204.29c-1.153-.04-2.373-.126-2.56-1.544a2.626 2.626 0 0 1-.025-.4s1.133.28 2.57.342c.878.044 1.703-.048 2.542-.15 1.606-.192 3.004-1.18 3.178-2.082.28-1.428.255-3.477.255-3.477zm-2.146 3.578h-1.33V5.518c0-.69-.29-1.037-.869-1.037-.641 0-.96.415-.96 1.235v1.789H6.949v-1.79c0-.819-.323-1.234-.96-1.234-.579 0-.868.348-.868 1.037v3.265H3.775V5.417c0-.69.173-1.235.525-1.64.362-.405.84-.612 1.428-.612.68 0 1.2.26 1.538.786l.333.555.332-.555c.343-.526.859-.786 1.539-.786.588 0 1.065.207 1.427.612.352.405.526.95.526 1.64v3.366z"></path></svg><span> Mastodon</span></a>&nbsp;&nbsp;
+        <a
+            href="https://protonmail.com/?utm_campaign=ww-all-2a-mail-int_site-g_acq-products_links&utm_source=protonvpn.com&utm_medium=link&utm_content=header_menu&utm_term=mail"
+            target="_blank"
+            rel="noreferrer nofollow noopener"><i class="pm-icon"></i><span> ProtonMail</span></a>
+    </div>
+</div>
+<nav class="navbar navbar-toggleable-md navbar-inverse" id="navbar-main">
+    <span class="ghost-bar"></span>
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="https://protonvpn.com/support">
+            <em></em>
+            <i></i>
+            <img src="https://protonvpn.com/support/wp-content/themes/protonvpn/img/protonvpn-white-transparent.svg" onerror="this.src='https://protonvpn.com/support/wp-content/themes/protonvpn/img/protonvpn-white-transparent.png'">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul> <!-- used for right alignment -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://protonvpn.com/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://protonvpn.com/secure-vpn">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://protonvpn.com/pricing">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://protonvpn.com/blog/">Blog</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://protonvpn.com/support">Support</a>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-item" id="nav-login">
+                    <a class="nav-link text-success text-uppercase" href="https://account.protonvpn.com">Login</a>
+                </li>
+                <li class="nav-item" id="nav-signup">
+                    <a class="nav-link btn btn-success text-uppercase" href="https://protonvpn.com/pricing">Signup</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2 class="mb-0"><a href="https://protonvpn.com/support">Support Center</a></h2>
+            </div>
+            <div class="col-lg-8">
+                <div id="kbPortal">
+                    <div id="ht-kb-search" class="clearfix">
+                        <form id="kbSearchForm" action="https://protonvpn.com/support/" method="GET">
+                            <div class="form-group">
+                                                            		<div class="ht-kb-article-search">
+			<form role="search" method="get" id="searchform" class="searchform" action="https://protonvpn.com/support/">
+				<label class="screen-reader-text" for="s">Search for:</label>
+				<input type="text" value="" placeholder="Have a question?" name="s" id="s" autocomplete="off" />
+				<input type="hidden" name="ht-kb-search" value="1" />
+				<button type="submit" id="searchsubmit"> <i class="fa fa-search"></i> <span>Search</span> </button>
+		</form>
+		</div>
+		                                                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+<div class="row">
+    <div class="col sidebar">
+        <div class="hidden-sm-down">
+
+
+
+<h4>Categories</h4>
+<ul>
+        <li>
+        <a href="https://protonvpn.com/support/categories/setup-and-use/">
+	        Setup and use        </a>
+                <ul>
+        	        	    		<li>
+    			<a href="https://protonvpn.com/support/categories/download-and-setup/">
+			        Download and setup		        </a>
+	        </li>
+        	    		<li>
+    			<a href="https://protonvpn.com/support/categories/access-content/">
+			        Access content		        </a>
+	        </li>
+        	    		<li>
+    			<a href="https://protonvpn.com/support/categories/speed-and-bandwidth/">
+			        Speed and bandwidth		        </a>
+	        </li>
+        	        </ul>
+            </li>
+        <li>
+        <a href="https://protonvpn.com/support/categories/account-and-billing/">
+	        Account and Billing        </a>
+                <ul>
+        	        	    		<li>
+    			<a href="https://protonvpn.com/support/categories/account/">
+			        Account		        </a>
+	        </li>
+        	    		<li>
+    			<a href="https://protonvpn.com/support/categories/billing/">
+			        Billing		        </a>
+	        </li>
+        	        </ul>
+            </li>
+        <li>
+        <a href="https://protonvpn.com/support/categories/troubleshooting-and-general-information/">
+	        Troubleshooting and general information        </a>
+                <ul>
+        	        	    		<li>
+    			<a href="https://protonvpn.com/support/categories/general-information/">
+			        General information		        </a>
+	        </li>
+        	    		<li>
+    			<a href="https://protonvpn.com/support/categories/troubleshooting/">
+			        Troubleshooting		        </a>
+	        </li>
+        	        </ul>
+            </li>
+    </ul>
+<p>&nbsp;</p>
+
+</div>    </div>
+    <div class="col-lg-9 main">
+        
+        
+        <span class="breadcrumbs">
+            <a href="https://protonvpn.com/support">Support Center</a> / 
+                        <a href="https://protonvpn.com/support/categories/download-and-setup">Download and setup</a> / 
+                        <a href="https://protonvpn.com/support/official-linux-vpn-debian/">How to install a VPN on Debian</a>
+        </span>
+
+        <div class="clear"></div>
+
+        <div class="body">
+
+            <h1>How to install a VPN on Debian</h1>
+
+            <div class="entry"><p><span style="font-weight: 400">Our app officially supports Linux Debian 10+. It should also work with most distros based on these Linux versions (not Ubuntu Server or Raspbian), but they are not officially supported.</span></p>
+<p><span style="font-weight: 400">If you are using the community-developed version of our Linux app, we recommend you uninstall it before installing the new app. See the note section at the end of this article for instructions on how to do this. </span></p>
+<p><strong><span style="font-size: 1rem">1. Get the ProtonVPN repo setup DEB package</span></strong></p>
+<p><a href="https://protonvpn.com/download/protonvpn-stable-release_1.0.1-1_all.deb" target="_blank" rel="noopener noreferrer"><i><span style="font-weight: 400">Download the ProtonVPN DEB package</span></i></a></p>
+<p><strong><span style="font-size: 1rem">2. Install the ProtonVPN repository</span></strong></p>
+<p><span style="font-weight: 400">Double-click the downloaded DEB package to install the repo using your default package manager. </span></p>
+<p><strong>3. Update the apt-get package list</strong></p>
+<p><span style="font-weight: 400">Open <strong>Terminal</strong> and enter the command:</span></p>
+<pre><span style="font-weight: 400">sudo apt-get update</span></pre>
+<p><strong>4. Install the ProtonVPN Linux app</strong></p>
+<p><span style="font-weight: 400">Last step! Type this command:</span></p>
+<pre><span style="font-weight: 400">sudo apt-get install protonvpn</span></pre>
+<h3><span style="font-weight: 400">Linux system tray icon</span></h3>
+<p><span style="font-weight: 400">Our Linux app can show a system tray icon that stays active when you close the main ProtonVPN window and allows you to easily <strong>Quick Connect</strong> or <strong>Disconnect</strong>.</span></p>
+<p><span style="font-weight: 400">To install the system tray icon, open Terminal and enter:</span></p>
+<pre><span style="font-weight: 400">sudo apt install gnome-shell-extension-appindicator gir1.2-appindicator3-0.1</span></pre>
+<p><span style="font-weight: 400">You might be asked to select your </span><b>default displays manager</b><span style="font-weight: 400">. If you are unsure which it is, enter the following command into a new terminal window to find out:</span></p>
+<pre><span style="font-weight: 400">grep </span><span style="font-weight: 400">'/usr/s\?bin'</span><span style="font-weight: 400"> /etc/systemd/system/display-manager.service
+</span></pre>
+<p><b>Restart</b><span style="font-weight: 400"> your system.</span></p>
+<p>Once installed, simply log in with your Proton account credentials. If you do not yet have an account, you can <a href="https://protonvpn.com/free-vpn/linux" target="_blank" rel="noopener">sign up for a Free ProtonVPN plan for Linux</a>.</p>
+<p>You are now ready to protect your online activity and access blocked content with ProtonVPN.</p>
+<p><span style="font-weight: 400">Note: The system tray icon may not work on Debian 11 because it requires dependencies that have been deprecated.</span></p>
+<p><a href="https://protonvpn.com/support/linux-vpn-setup/" target="_blank" rel="noopener noreferrer"><i><span style="font-weight: 400">Learn how to use the ProtonVPN Linux app</span></i></a></p>
+<h2><span style="font-weight: 400">Notes</span></h2>
+<h4><strong>1. Uninstall the official app</strong></h4>
+<p>To uninstall the official app:</p>
+<pre>sudo apt-get autoremove protonvpn</pre>
+<p>Remove any leftover files:</p>
+<pre>rm -rf ~/.cache/protonvpn</pre>
+<p>And</p>
+<pre>rm -rf ~/.config/protonvpn</pre>
+<h4><strong>2. Uninstall the older community ProtonVPN app</strong></h4>
+<p><span style="font-weight: 400">To uninstall the older community ProtonVPN app, run:</span></p>
+<pre><span style="font-weight: 400">protonvpn configure</span></pre>
+<p><span style="font-weight: 400">Select option 7) Purge Configuration. Then uninstall through the package manager you used for installation. If the package is installed system-wide, use the command:</span></p>
+<pre><span style="font-weight: 400">sudo pip3 uninstall protonvpn-cli</span></pre>
+<p><span style="font-weight: 400">If not, then use:</span></p>
+<pre><span style="font-weight: 400">pip3 uninstall protonvpn-cli</span></pre>
+<h4><strong>3. Disable Kill Switch if you have uninstalled the app</strong></h4>
+<p><span style="font-weight: 400">The Kill Switch can be easily disabled from within the official Linux app, but this will not be possible if you uninstalled the app first without disabling the Kill Switch. This may result in your system being unable to access the internet. To remove the Kill Switch after the app has been uninstalled:</span></p>
+<p><span style="font-weight: 400">a) Identify ProtonVPN connection names by running the command:</span></p>
+<pre><span style="font-weight: 400">nmcli connection show --active</span></pre>
+<p><span style="font-weight: 400">This will display a list of all your system’s active connections.</span></p>
+<p><span style="font-weight: 400">b) Look for any connections with the <strong>pvpn-</strong> This usually includes <strong>pvpn-killswitch</strong> and <strong>pvpn-ipv6leak-protection</strong>, and may include <strong>pvpn-routed-killswitch</strong>. Delete all these connections using the following command:</span></p>
+<pre><span style="font-weight: 400">nmcli connection delete [connection name]</span></pre>
+<p><span style="font-weight: 400">For example:</span></p>
+<pre><span style="font-weight: 400">nmcli connection delete pvpn-killswitch</span></pre>
+<p><span style="font-weight: 400">c) Re-run the following command to verify that ProtonVPN connections have been deleted:</span></p>
+<pre><span style="font-weight: 400">nmcli connection show --active</span></pre>
+<p><span style="font-weight: 400">If any ProtonVPN connections remain, delete them as described above.</span></p>
+<h4><strong>4. Required dependencies</strong></h4>
+<p><span style="font-weight: 400">Our Linux app needs </span><i><span style="font-weight: 400">one</span></i><span style="font-weight: 400"> of the following dependencies installed in order to work. Installing both of these dependencies is not recommended as it may cause problems:</span></p>
+<ul>
+<li style="font-weight: 400"><span style="font-weight: 400">KWallet </span><i><span style="font-weight: 400">or</span></i></li>
+<li style="font-weight: 400"><span style="font-weight: 400">Gnome-keyring</span></li>
+</ul>
+<p>Note that <b>most distros come pre-installed with one of these dependencies</b>, so usually no additional configuration is required. Also required is:</p>
+<ul>
+<li>systemd</li>
+</ul>
+<h4><strong>5. Try out the early release version of this app</strong></h4>
+<p>The early access version of our Linux app gives you access to new features before they are released publicly, but it is still in development. By using the early access version and sharing your feedback, you can help us find and address bugs. If you would like to install the early access version instead of the stable release of this app, please see <a href="https://protonvpn.com/support/early-access-linux-vpn-debian/" target="_blank" rel="noopener">here</a>.</p>
+</div>
+
+                        
+        </div>
+
+
+                
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/support/official-linux-vpn-debian/#respond" style="display:none;">Cancel reply</a></small></h2><form action="https://protonvpn.com/support/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1866' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+                    </div>
+</div>
+
+</div>
+
+<div id="cats">
+    <div class="container">
+
+        
+        <div class="text-center">
+            <p><span>Don't find your answer? We're happy to help you! &nbsp; &nbsp; </span><a href="https://protonvpn.com/support-form" class="btn btn-success text-uppercase">Contact Our Support Team</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="inlineUpsell">
+    <div class="inlineUpsell-headline">
+        <h2 class="inlineUpsell-title">Secure your internet</h2>
+        <a href="https://protonvpn.com/pricing" class="inlineUpsell-link text-uppercase">Get ProtonVPN</a>
+    </div>
+    <div class="inlineUpsell-content">
+        <ul class="inlineUpsell-list">
+            <li class="inlineUpsell-item">
+                <i class="fa fa-check"></i>
+                <span>Strict no logs policy</span>
+            </li>
+            <li class="inlineUpsell-item">
+                <i class="fa fa-check"></i>
+                <span>All apps are open source and audited</span>
+            </li>
+            <li class="inlineUpsell-item">
+                <i class="fa fa-check"></i>
+                <span>High-speed connections (up to 10 Gbit)</span>
+            </li>
+            <li class="inlineUpsell-item">
+                <i class="fa fa-check"></i>
+                <span>Based in Switzerland</span>
+            </li>
+            <li class="inlineUpsell-item">
+                <i class="fa fa-check"></i>
+                <span>30-day money-back guarantee</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="footer">
+    <div class="container">
+        <div class="row text-nowrap">
+            <div class="col">
+                <h2 class="font-heavy text-uppercase">Features</h2>
+                <ul>
+                    <li>
+                        <a href="https://protonvpn.com/free-vpn">Free VPN</a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/vpn-servers">VPN Servers</a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/support/streaming-guide/">
+                            VPN for Streaming
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/support/watch-netflix-with-vpn/">
+                            Netflix VPN
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/support/secure-core-vpn/">
+                            Secure Core VPN
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/support/protonvpn-setup-guide/">
+                            Getting Started
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <h2 class="font-heavy text-uppercase">Platforms</h2>
+                <ul>
+					<li>
+                        <a href="https://protonvpn.com/download/">
+							All platforms
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/download-windows/">
+                            VPN for Windows
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/download-macos/">
+                            VPN for Mac
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/download-android/">
+                            VPN for Android
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/download-ios/">
+                            VPN for iOS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/download-linux/">
+                            VPN for Linux
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <h2 class="font-heavy text-uppercase">Legal</h2>
+                <ul>
+                    <li>
+                        <a
+                            href="https://ge.ch/hrcintapp/externalCompanyReport.action?companyOfsUid=CHE-496.963.746&amp;lang=FR">
+                            Imprint
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/privacy-policy">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/terms-and-conditions">
+                            Terms &amp; Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/blog/transparency-report">
+                            Transparency Report
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/blog/threat-model">Threat Model</a>
+                    </li>
+                    <li>
+                        <a data-em="abuse" href="mailto:abuse@protonvpn.com">Report Abuse</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <h2 class="font-heavy text-uppercase">Company</h2>
+                <ul>
+                    <li>
+                        <a href="https://protonvpn.com/about">About</a>
+                    </li>
+                    <li>
+                        <a href="https://protonstatus.com/">ProtonVPN Status</a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/support/">Support</a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/careers">Careers</a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/blog/open-source/">
+                            Open Source
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://protonvpn.com/press">Press/Media kit</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <h2 class="font-heavy text-uppercase">Social</h2>
+                <ul>
+                    <li class="fb">
+                        <a target="_blank" rel="noreferrer nofollow noopener" href="https://facebook.com/ProtonVPN">
+                            <i class="fa fa-facebook-official"></i>
+                            <span>Facebook</span>
+                        </a>
+                    </li>
+                    <li class="tw">
+                        <a target="_blank" rel="noreferrer nofollow noopener" href="https://twitter.com/ProtonVPN">
+                            <i class="fa fa-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                    </li>
+                    <li class="reddit">
+                        <a target="_blank" rel="noreferrer nofollow noopener"
+                            href="https://www.reddit.com/r/ProtonVPN/">
+                            <i class="fa fa-reddit-alien"></i>
+                            <span>Reddit</span>
+                        </a>
+                    </li>
+                    <li class="insta">
+                        <a target="_blank" rel="noreferrer nofollow noopener"
+                            href="https://www.instagram.com/protonvpn/">
+                            <i class="fa fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                    </li>
+                    <li class="masto">
+                        <a target="_blank" rel="noreferrer nofollow noopener" href="https://mastodon.social/@ProtonVPN">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" width="15" height="15"
+                                class="mastodon-icon" aria-hidden="true">
+                                <path
+                                    d="M13.578 5.205c0-2.778-1.823-3.593-1.823-3.593-.916-.42-2.493-.598-4.132-.612h-.044c-1.64.014-3.211.193-4.132.612 0 0-1.823.815-1.823 3.593 0 .636-.01 1.398.01 2.203.067 2.72.496 5.396 3.009 6.062a9.46 9.46 0 0 0 2.956.328c1.451-.082 2.27-.516 2.27-.516l-.047-1.056s-1.042.328-2.204.29c-1.153-.04-2.373-.126-2.56-1.544a2.626 2.626 0 0 1-.025-.4s1.133.28 2.57.342c.878.044 1.703-.048 2.542-.15 1.606-.192 3.004-1.18 3.178-2.082.28-1.428.255-3.477.255-3.477zm-2.146 3.578h-1.33V5.518c0-.69-.29-1.037-.869-1.037-.641 0-.96.415-.96 1.235v1.789H6.949v-1.79c0-.819-.323-1.234-.96-1.234-.579 0-.868.348-.868 1.037v3.265H3.775V5.417c0-.69.173-1.235.525-1.64.362-.405.84-.612 1.428-.612.68 0 1.2.26 1.538.786l.333.555.332-.555c.343-.526.859-.786 1.539-.786.588 0 1.065.207 1.427.612.352.405.526.95.526 1.64v3.366z">
+                                </path>
+                            </svg>
+                            <span>Mastodon</span>
+                        </a>
+                    </li>
+                    <li class="protonmail">
+                        <a target="_blank" rel="noreferrer nofollow noopener" href="https://protonmail.com">
+                            <img src="https://protonvpn.com/support/wp-content/themes/protonvpn/img/protonmail-sign-white.png" alt="ProtonMail Logo">
+                            <span>ProtonMail</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col col-lg-3 col-md-5">
+                <h2 class="font-heavy text-uppercase">Contact</h2>
+                <p>
+                    <span>Support</span>:
+                    <a class="general-contact-modal text-success" href="#">
+                        Show Details
+                    </a>
+                    <br>
+                    <span>Partnership</span>:
+                    <a href="https://partners.protonvpn.com/" class="text-success">partners.protonvpn.com</a>
+                    <br>
+                    <span>Media</span>:
+                    <a data-em="media" class="text-success" href="mailto:media@protonvpn.com">media@protonvpn.com</a>
+                    <br>
+                    <span>Abuse</span>:
+                    <a data-em="abuse" class="text-success" href="mailto:abuse@protonvpn.com">abuse@protonvpn.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contactModal">
+    <div class="bg"></div>
+    <div class="window"> <i class="fa fa-times fa-2x close"></i>
+        <p>
+			<span>For customer support inquiries, please submit the following form for the fastest response:</span>
+            <br>
+			<a href="https://protonvpn.com/support-form" target="_blank" class="btn btn-success">Support Form</a>
+		</p>
+        <p>
+			<span>For all other inquiries:</span>
+            <br>
+			<button aria-label="PGP Public Key" title="PGP Public Key" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#conPubKey"><i class="fa fa-key security-icon" data-toggle="collapse" aria-hidden="true"></i></button>
+			<a data-em="contact" class="text-success" href="mailto:%63&#111;&#110;&#116;ac&#116;&#64;%70%72&#111;&#116;&#111;&#110;v%70%6e%2ec&#111;m">contact&#64;protonvpn.com</a>
+		</p>
+		<pre id="conPubKey" class="collapse">
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: OpenPGP.js v4.10.10
+Comment: https://openpgpjs.org
+
+xsBNBFiYeeIBCACpwuYcTsACyjQaqY3tOUonokamGZf3VDuLvcA9nQnu4vlB
+n1RFFUJa5Pmf2yZ9EjJFSldTl5lreE3tFf53CcZ9wKa1R6aMnN/0VqURJho0
+ZTqevQlCvuJ9kKHkDck3Em0/1WWnhDJgabp+fOa5HAHoAvcNy5gVPuexTT/N
+wp6QcfB7w+qFhf73s0bcSn5RC+FAYlQxZVFhFtA7/7LthBVatDJrYLYP9XJd
+zOZqz9AX0XZwKal25RcVeGHkNKgloo0bTgro4D88MR7saqXFHTRhy3+Wss7c
+uqrh0uIkVmqtadoK/rAbqOyFXQ2DlvSMVrEMLUvwlZbC0taqcKDfNA+FABEB
+AAHNLWNvbnRhY3RAcHJvdG9udnBuLmNvbSA8Y29udGFjdEBwcm90b252cG4u
+Y29tPsLAfwQQAQgAKQUCWJh54wYLCQcIAwIJEN4dfnhhw11TBBUIAgoDFgIB
+AhkBAhsDAh4BAAoJEN4dfnhhw11T6PwIAKgIHTUaEcCFQ5WfmwGpdhRgFe7H
+gnHR8UOFPrRKnbCOQgTVPGwCFt8UVFhEgbmtroThU89DpxFSYUOD6nZ2k1X3
+X4Q9OsItFUUuhPtLJrkz5ghtZLmsAH/edTRbVU1Ew1E8KbylLFI1J5yId7zR
+GdnaTXv/E7P3po5X/b08TFAhXSyYYUbMeQuthbJajtpFygr53lm47cOWa4N8
+udqLhmpheaQj04DuqYXOGC08JQn+XbHzhFl5Yvlt9Idk8+7c2UJ0qgWKQ5ZV
+mquRAw5HDCQM5OqF1MoImDxOH+tK3PUlvFDsLZ1WPEOHK/EN12sPBx0x1R04
+fcPTPdbMwgISGM3OwE0EWJh54gEIALqhrLUpvarPc0nkuHpyJC/MsrIDPLuV
+qMc49tgjgDBsyIKJFEP9qCnkSOEixaFi+nTljUSpkHGR+PvEGecmcOdW6djN
+QGxon/nwBT9d8HbtxJesaEIzwRAxmqQW9MqNq4UsfNQ0VvUYqV9wEbYfdDT/
+jZfz9N0hjFELF1sg3UPcCRijhf162bp+rLQdO9vWVUbOdMQvsM/kyUJ6JMXR
+xUtyKC05ddxii2SMr4XUW45ostPbxJybOF5oSZpEb1EIlrTLLPAe/498XlBW
+hpRAPe+9ZfNs7drMvUEFnnOXahrXAuaaZpyaS/XBaloqSb1+v2AkUep3dbSF
+PaRtbXRMS+kAEQEAAcLAaAQYAQgAEwUCWJh54wkQ3h1+eGHDXVMCGwwACgkQ
+3h1+eGHDXVMZ4Qf4hu5N8/uYNDqJMFRIWSCpPGxmyIVXGARG4hgR8gwPZY9K
+fReAUndX3uODBNIgZU7I3YntawU1DlP6GpP6yyR/8lfUMNCAXPDmd+zTFYIJ
+UDHD8sw2GRrFVzFOKUpAapWFOI4XjSMP2UiK4HgrpUjAhe1wSaa7nEjtAuYT
+zFx1QSuQD1iYcOF/FAm7EuhBIfWITjYAobGM6gonPbp3IPHM52rUbulllcdV
+vCLs+blcyiVCGZlNcmlg3eibAJJL19TQLqT2DbQvQ/SyVBJGjoT+y4TTRtmZ
+cebEjt2KJcc4x2lzPq3z2KJNyJTOTMB+aYD9Ma9IObDds+M/+5XDWi7f
+=ueTT
+-----END PGP PUBLIC KEY BLOCK-----
+
+</pre>
+        <p>
+			<span>You can also Tweet to us:</span>
+            <br> <a target="_blank" href="https://twitter.com/protonvpn" class="text-success"> @ProtonVPN </a>
+		</p>
+    </div>
+</div>
+
+<div id="foot">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 location">
+                <p>
+                    <img src="https://protonvpn.com/support/wp-content/themes/protonvpn/img/protonvpn-white-transparent.svg"
+                        onerror="this.src='https://protonvpn.com/support/wp-content/themes/protonvpn/img/protonvpn-white-transparent.png'">
+                </p>
+                <p><strong>Proton Technologies AG</strong></p>
+                <p>Route de la Galaise 32<br>
+                    1228 Plan-les-Ouates<br>
+                    Geneva, Switzerland</p>
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
+                <p class="hidden-lg-up">&nbsp;</p>
+                <h2 class="text-uppercase">Built with the Support of</h2>
+                <p>
+                    <a href="https://protonmail.com/" target="_blank">
+                        <img class="mail" src="https://protonvpn.com/support/wp-content/themes/protonvpn/img/protonmail-white-transparent.svg" alt="ProtonMail" height="50" onerror="this.src='https://protonvpn.com/support/wp-content/themes/protonvpn/img/protonmail-white-transparent.png'">
+                    </a>
+                </p>
+                <p>
+                    <a href="https://fongit.ch/" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="https://protonvpn.com/support/wp-content/themes/protonvpn/img/fongit-logo.png" alt="Fongit - innovation incubator" height="40">
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.innosuisse.ch/inno/en/home.html" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="https://protonvpn.com/support/wp-content/themes/protonvpn/img/swiss.svg" alt="Innosuisse - Swiss Innovation Agency" width="200" />
+                    </a>
+                </p>
+                <p>
+                    <a href="https://ec.europa.eu/programmes/horizon2020/en" target="_blank" rel="nofollow noopener noreferrer">
+                        <img src="https://protonvpn.com/support/wp-content/themes/protonvpn/img/logo-gdpr-eu-white.svg" alt="This project is supported by the Horizon 2020 Framework Programme of the European Union" width="180" />
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/plugins/ht-knowledge-base/js/jquery.livesearch.js' id='ht-kb-live-search-plugin-js'></script>
+<script type='text/javascript' id='ht-kb-live-search-js-extra'>
+/* <![CDATA[ */
+var framework = {"liveSearchUrl":"https:\/\/protonvpn.com\/support\/?ajax=1&ht-kb-search=1&s="};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/plugins/ht-knowledge-base/js/ht-kb-livesearch.js' id='ht-kb-live-search-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/themes/protonvpn/js/functions.js?ver=1623655431' id='ht_theme_custom-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/themes/protonvpn/js/bootstrap.4.3.1.js?ver=4.3.1' id='bootstrap-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/themes/protonvpn/js/custom.js?ver=1623655431' id='custom-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-includes/js/comment-reply.min.js' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/themes/protonvpn/js/jquery.validate.min.js?ver=1.11.1' id='jquery-validation-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/themes/protonvpn/js/comment-validation.js?ver=1623655431' id='comment-validation-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/themes/protonvpn/inc/ht-core/js/jquery-picture-min.js' id='jquery-picture-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-content/themes/protonvpn/inc/ht-core/js/jquery.appear.js' id='jquery-appear-js'></script>
+<script type='text/javascript' src='https://protonvpn.com/support/wp-includes/js/wp-embed.min.js' id='wp-embed-js'></script>
+
+</body>
+</html>

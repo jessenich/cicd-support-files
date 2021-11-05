@@ -1,5 +1,3 @@
-
-
 function New-GitException {
     param(
         [Parameter()] $message,

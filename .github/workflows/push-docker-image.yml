@@ -23,14 +23,18 @@ jobs:
     name: Publish Debian ${{ matrix.tag }}
     env:
       IMAGE: debian
+
     strategy:
       fail-fast: false
       matrix:
         tag: [ "11", "11-slim", "10", "10-slim", "9", "9-slim" ]
+
       max-parallel: 2
+
     permissions:
       contents: read
       packages: write
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

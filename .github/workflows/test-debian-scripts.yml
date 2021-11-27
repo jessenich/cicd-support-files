@@ -26,6 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup Docker
+
       - name: Pull Debian
         run: docker pull debian:"${{ matrix.tag }}"
 

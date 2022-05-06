@@ -89,7 +89,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push Latest Debian
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         env:
           platforms: "${{ env.TARGET_PLATFORMS }}"
         with:

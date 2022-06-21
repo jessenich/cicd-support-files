@@ -11,7 +11,7 @@ root_dir=${root_dir:-$abs_dir}
 rel_dir=${abs_dir#$root_dir}
 # if run by git, assume command is git-annex
 # otherwise, don't assume, to allow other uses
-cmd=! [ "$(basename "$(readlink -e /proc/$PPID/exe)")" = "git" ] || cmd=git-annex
+cmd=! [ "$(basename "$(readlink -e /proc/$PPID/exe)")" -eq "git" ] || cmd=git-annex
 exec docker run -it --rm \
     -u "$(id -u):$(id -g)" \
     -v /etc/passwd:/etc/passwd:ro \

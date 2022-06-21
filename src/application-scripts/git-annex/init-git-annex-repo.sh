@@ -7,9 +7,6 @@ EOF
 }
 
 _igar_main() {
-
-
-
     while [ $# -gt 0 ]; do
         case "$1" in
             -d | --dir | --directory)

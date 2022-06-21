@@ -2,22 +2,17 @@
 
 # shellcheck disable=SC2154
 
-echo "WIP..................." >&2;
-exit 127;
-
-
-
-__arduino_parse_args() {
-    local __version="1.8.16";
-    local __download_path="$HOME/Downloads"
+:installer::parseargs::arduino() {
+    local version="1.8.16";
+    local download_path="$HOME/Downloads"
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
             -v | --version)
-                __version="$2";
+                version="$2";
                 shift 2;;
 
             -d | --download-path)
-                __download_path="$2";
+                download_path="$2";
                 shift 2;;
 
             *)
@@ -30,11 +25,12 @@ __arduino_parse_args() {
 
 }
 
-__download-arduino-tarball() {
-    local download="${1:-"arduino-${__version:-1.8.16}-linux64.tar.xz"}";
+:installer:as_tarball::download()
+    local download="${1:-"arduino-${version:-1.8.16}-linux64.tar.xz"}";
     local output_dir="${2:-$HOME/Downloads}";
 
     curl -o "${output_dir}/${download}" \
+        "https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-rc3_macOS_64bit.dmg"
         "https://downloads.arduino.cc/arduino-ide/${download}" \
         -H 'authority: downloads.arduino.cc' \
         -H 'sec-ch-ua-platform: "Linux"' \
@@ -49,7 +45,7 @@ __download-arduino-tarball() {
         -H 'accept-language: en-US,en;q=0.9';
     local exit_code="$?";
     if ((exit_code != 0)) && [ ! -e "${output_dir}/${download}" ]; then
-        echo "Download of '$download' failed. Exiting with status code $exit_code" >&2;
+        echo "Download '$download' failed. Exiting with status code $exit_code" >&2;
         exit "$exit_code"
     fi
 
@@ -57,16 +53,22 @@ __download-arduino-tarball() {
     exit 0;
 }
 
-__install_arduino_tarball() {
+:installer::from_tarball::arduino() {
     if [ ! -e "$1" ]; then
         echo "File '$1' not found or file is corrupt." >&2;
         exit 1;
     fi
 
-    local __dir_name;
-    __dir_name="$(tar xf --overwrite --overwrite-dir "$1")";
-    bash "${__dir_name/install.sh}";
+    local dir_name;
+    dir_name="$(tar xf --overwrite --overwrite-dir "$1")";
+    bash "${dir_name/install.sh}";
 
 }
-
-
+                
+:installer::from_tarball::arduino() {
+    ztest
+}
+                
+arduino_parse_args "$@"
+download = "$(download-arduino-tarball)"
+install_arduino_tarball $download

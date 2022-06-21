@@ -1,4 +1,4 @@
-. GitCliSyncOperationOptions.ps1
+. ./GitCliSyncOperationOptions.ps1
 
 class GitRepositoryOptions {
     [GitCliSyncOperationOptions] $Operations;

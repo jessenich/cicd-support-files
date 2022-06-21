@@ -138,11 +138,7 @@ parse_args() {
     shift;
     argpos+=1;
 
-    while [ "${1[@]:0:2}" = ]
-
     while [ "$#" -gt 0 ]; do
-
-
         case "$1" in
             -rP | --read-primary-std-in)
                 read_primary=true;
@@ -215,37 +211,21 @@ parse_args() {
                 argpos+=1
                 shift;;
 
-
-
             --correlation-id)
                 if [ -z "$2" ]; then echo_usage && exit 1; fi
                 correlation_id="$2";
                 shift 2;;
 
-            --storage-driver)
-                if [ -z "$2" ]; then show_usage && exit 1; fi
-                case "$2" in
-                    [Ff][Ss] | [Ff]ile[Mm]arks) storage_driver=marks;;
-                    [Ss][Qq][Ll]ite) storage_driver=sqlite;;
-                    [Dd]ot[Ee]nv | [Ee]nv) storage_driver=dotenv;;
-                    [Jj][Ss][Oo][Nn]) storage_driver=json;;
-                    [Yy][Aa][Mm][Ll] | [Yy][Aa][Ll]) storage_driver=yaml;;
-                esac
-                shift 2;;
-
-
             --log-level)
                 case "$2" in
-                    [Vv] | [Vv]erbose) log_level=5;;
-                    [Dd] | [Dd]ebug) log_level=4;;
-                    [Ii] | [Ii]nfo | [Ii]nformation) log_level=3;;
-                    [Ww] | [Ww]arn | [Ww]arning) log_level=2;;
-                    [Ee] | [Ee]rror) log_level=1;;
-                    [Ff] | [Ff]atal) log_level=0;;
+                    [Vv]*) log_level=5;;
+                    [Dd]*) log_level=4;;
+                    [Ii]*) log_level=3;;
+                    [Ww]*) log_level=2;;
+                    [Ee]*) log_level=1;;
+                    [Ff]*) log_level=0;;
                 esac
                 shift 2;;
-
-
 
             *)
                 # Secret values are positional

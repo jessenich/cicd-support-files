@@ -78,8 +78,7 @@ begin {
 }
 
 process {
-
-    Get-ChildItem - -Depth 1 -FollowSymlink -Directory -Include '.git' -Hidden | Select-Object -ExpandProperty FullName | ForEach-Object -Process {     pwsh
+    Get-ChildItem - -Depth 1 -FollowSymlink -Directory -Include '.git' -Hidden | Select-Object -ExpandProperty FullName | ForEach-Object -Process {
         $directory = $PSItem.Replace('/.git', [string]::Empty);
         $branch =
         if (!(Test-Path $directory)) {

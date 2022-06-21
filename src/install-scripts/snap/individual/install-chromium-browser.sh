@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#!/usr/bin/env bash
-
 if which chromium >/dev/null; then
     echo "chromium already installed at $(which chromium), see 'snap help refresh'" >&2;
 else
